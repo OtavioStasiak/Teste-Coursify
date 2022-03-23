@@ -101,9 +101,26 @@ export function Home(){
     var arrayEditable = categories.sort((a,b) => {return (a.name > b.name) ? sortValue : ((b.name > a.name) ? secondSortValue : 0);});
     //Array que possibilita organização +Vistos e -Vistos;
     var testeArray = teste.split("|");
-    var testeArrayII = testeArray.length === 10 ? testeArray.sort((a, b) => {return (a.split(':')[1] > b.split(':')[1]) ? 1 : ((b.split(':')[1] > a.split(':')[1]) ? -1 : 0);}).reduce((a, b) => a.split(':')[0] + ',' + b.split(':')[0]) : '';
-    var firstItemToDelete = testeArrayII.split(',');
-    console.log(testeArrayII)
+    var testeArrayII = testeArray.length === 10 ? testeArray.sort((a, b) => (Number(a.split(':')[1]) > Number(b.split(':')[1])) ? 1 : (Number(b.split(':')[1]) > Number(a.split(':')[1])) ? -1 : 0)  : '';
+    
+    function handleCreateCategory(){
+      const mostSeen = [];
+      if(testeArrayII !== ''){
+       var item0 = categories.find(item => item.id === Number(testeArrayII[0].split(":")[0]));
+       console.log(item0)
+       /* mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[1])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[2])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[3])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[4])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[5])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[6])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[7])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[8])));
+       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[9]))); */
+      };
+
+    };
+    useEffect(() => {handleCreateCategory()},[testeArrayII])
     return(
         <View style={styles.container}>
 
