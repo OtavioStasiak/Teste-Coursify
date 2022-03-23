@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Routes } from './src/Routes';
+import { CourseDetails } from './src/Screens/CourseDetails';
 import { Home } from './src/Screens/Home';
+import  GestureHandler from 'react-native-gesture-handler';
 
 export default function App() {
   return (
-    <Home />
+    <Routes />
   );
 }
 

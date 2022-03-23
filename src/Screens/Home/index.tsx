@@ -15,6 +15,7 @@ type CategoriesProps = {
         id: string | number;
         name: string;
         slug: string;
+
 }
 
 export function Home(){
@@ -42,7 +43,7 @@ export function Home(){
             <Loading />
             : 
             <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center'}}>
-              {categoriesFinal.map((item, index) => <CourseCatalog key={index} id={item.id} slug={item.slug} name={item.name} link={item.link} />)} 
+              {categoriesFinal.map((item, index) => <CourseCatalog key={index} id={item.id} slug={item.slug} name={item.name} />)} 
             </ScrollView>}
             <Footer />
         </View>

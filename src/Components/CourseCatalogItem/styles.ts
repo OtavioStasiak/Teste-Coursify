@@ -32,13 +32,14 @@ export const styles = StyleSheet.create({
     },
     footer: {
         width: '100%',
-        height: '10%',
+        height: '15%',
         backgroundColor: Colors.Primary_White,
         top: 20,
-        paddingLeft: 15
+        paddingLeft: 15,
+        borderRadius: 10
     },
     button: {
-        marginTop: 10
+        marginTop: 10,
     },
     html: {
         paddingLeft: 13,

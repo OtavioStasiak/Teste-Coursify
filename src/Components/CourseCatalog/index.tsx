@@ -9,7 +9,6 @@ import { CourseCatalogItem } from '../CourseCatalogItem';
 import { styles } from './styles';
 
 type Props = {
-        link: string;
         id: string | number;
         name: string;
         slug: string;
@@ -24,9 +23,12 @@ type PostProps = {
         rendered: string;
     },
     featured_media: string | number;
+    content:{ 
+        rendered: string;
+    }
 }
 
-export function CourseCatalog({link, id, name, slug}: Props){
+export function CourseCatalog({ id, name, slug}: Props){
 
    const [post, setPost] = useState<PostProps []>([]);
 
@@ -46,7 +48,7 @@ export function CourseCatalog({link, id, name, slug}: Props){
             <Description description={name}/>
 
             <ScrollView style={{width: '100%',height: 260}} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{alignItems: 'center'}}>
-                {post.map((item, index) => <CourseCatalogItem key={index} title={item.title.rendered} description={item.excerpt.rendered} imageID={item.featured_media}/>)}
+                {post.map((item, index) => <CourseCatalogItem content={item.content.rendered} idPost={id} key={index} title={item.title.rendered} description={item.excerpt.rendered} imageID={item.featured_media}/>)}
             </ScrollView>
 
         </View>
