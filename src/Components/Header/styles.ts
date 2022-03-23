@@ -8,10 +8,22 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 15,
+        paddingRight: 10,
+        paddingLeft: 15,
         backgroundColor: Colors.Primary_White,
         elevation: 2,
         paddingTop: 20
+    },
+    content: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '70%',
+        height: '100%'
+    },
+    backButton: {
+
+        marginRight:5,
+
     },
     button: {
         width: 40,

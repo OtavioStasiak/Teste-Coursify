@@ -34,9 +34,10 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: '15%',
         backgroundColor: Colors.Primary_White,
-        top: 20,
+        top: 19,
         paddingLeft: 15,
-        borderRadius: 10
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10
     },
     button: {
         marginTop: 10,

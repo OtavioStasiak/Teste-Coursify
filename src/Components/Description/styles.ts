@@ -4,7 +4,7 @@ import { Colors } from "../../Colors/Colors";
 export const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 30,
+        height: 40,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
     },
     titleButton: {
         fontSize: 15,
-        paddingRight: 6
+        paddingRight: 6,
+        color: Colors.Primary_Gray
     }
 })

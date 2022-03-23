@@ -15,6 +15,7 @@ type Props = {
     description: string;
     imageID: string | number;
     content: string;
+    isLoading: boolean;
 };
 
 export type PostProps = {
@@ -23,9 +24,9 @@ export type PostProps = {
     imageLink: string;
 }
 
-export function CourseCatalogItem({title, content, description, imageID, idPost}: Props){
+export function CourseCatalogItem({title, content, description, imageID, isLoading, idPost}: Props){
     //Função e Constantes que determinam o Loading e executam o API REST.
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(isLoading);
     const [imageProps, setImageProps] = useState({guid:{rendered: ''}, media_details: {sizes: {medium:{source_url: ''}, large:{}}}});
 
     async function fetchImagePost() {
@@ -38,10 +39,10 @@ export function CourseCatalogItem({title, content, description, imageID, idPost}
 
     };
 
-    useEffect(() => {fetchImagePost()}, []);
+    useEffect(() => {fetchImagePost()}, [idPost]);
 
     const image = imageProps.media_details.sizes.medium.source_url === '' ? 'https://media.istockphoto.com/photos/dotted-grid-paper-background-texture-seamless-repeat-pattern-picture-id1320330053?b=1&k=20&m=1320330053&s=170667a&w=0&h=XisfN35UnuxAVP_sjq3ujbFDyWPurSfSTYd-Ll09Ncc=' : imageProps.media_details.sizes.medium.source_url;
-    
+  
     //Navegação;
 
     const navigation = useNavigation();

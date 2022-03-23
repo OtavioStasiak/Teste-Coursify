@@ -48,22 +48,25 @@ export function CourseDetails(){
    
     return(
         <View style={styles.container}>
-            <Header />
-            { loading === true
-            ?
-            <Loading/>
-            :
+            <Header Return={true} />
+            
                 <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center'}}>
                     <Text style={styles.title}>
-                        {PostParams.title}
+                        {PostParams.title.replace('&#8211;', '')}
                     </Text>
 
                     <Image source={{uri: PostParams.imageLink}} style={styles.image} />
+                    {
+                    loading === true 
+                    ?
+                    <Loading />
+                    :
                     <View style={styles.content}>
                         <HTMLView value={finalContent}/>
                     </View>
+                    }
                 </ScrollView>
-            }
+            
             <Footer />
         </View>
     )

@@ -1,9 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { LogBox, StyleSheet, Text, View } from 'react-native';
 import { Routes } from './src/Routes';
-import { CourseDetails } from './src/Screens/CourseDetails';
-import { Home } from './src/Screens/Home';
-import  GestureHandler from 'react-native-gesture-handler';
+
+LogBox.ignoreLogs([" Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.","[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!"])
 
 export default function App() {
   return (
