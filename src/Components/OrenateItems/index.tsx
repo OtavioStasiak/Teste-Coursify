@@ -26,7 +26,7 @@ export function OrdenateItems({onChangeFilter}: Props){
     };
 
     //Armazena e envia o Filtro Selecionado
-    const [selectedItems, setSelectedItems] = useState('Padrão');
+    const [selectedItems, setSelectedItems] = useState('A-Z');
 
    const spacementVariant = selectedItems.length >3 ? {marginRight: '4%', marginLeft: '25%'} : {};
 

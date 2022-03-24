@@ -11,6 +11,7 @@ import { Loading } from '../../Animations/Loading';
 import { api } from '../../Services/api';
 
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 type CategoriesProps = {
         link: string;
@@ -25,6 +26,7 @@ export function Home(){
   //API REST;
     const [categories, setCategories] = useState<CategoriesProps[]>([]);
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigation();
 
     async function fetchDescription() {
         setLoading(true);
@@ -33,7 +35,7 @@ export function Home(){
 
         const response = await api.get('categories/')
         .then(response => setCategories(response.data))
-        .catch(error => console.log(error))
+        .catch(error => navigation.navigate('Error'))
         .finally(() => setLoading(false));
     }
     
@@ -79,20 +81,26 @@ export function Home(){
         setLoading(true);
 
         if(filter === 'A-Z'){
+          setWhatArray(false);
+          setMostSeen([]);
           setTeste('');
           setSortValue(1);
           setSecondSortValue(-1);
           setLoading(false);
         }else if(filter === 'Z-A'){
+          setWhatArray(false);
+          setMostSeen([]);
           setTeste('');
           setSortValue(-1);
           setSecondSortValue(1);
           setLoading(false);
         }else if(filter === '+ Vistos'){
           setTeste('');
+          handleCreateArrayMostSeen('+');
           setLoading(false);
         }else if(filter === '- Vistos'){
           setTeste('');
+          handleCreateArrayMostSeen('-')
           setLoading(false);
         };
     };
@@ -102,25 +110,40 @@ export function Home(){
     //Array que possibilita organização +Vistos e -Vistos;
     var testeArray = teste.split("|");
     var testeArrayII = testeArray.length === 10 ? testeArray.sort((a, b) => (Number(a.split(':')[1]) > Number(b.split(':')[1])) ? 1 : (Number(b.split(':')[1]) > Number(a.split(':')[1])) ? -1 : 0)  : '';
-    
-    function handleCreateCategory(){
-      const mostSeen = [];
+  
+    //Ordena por ordem das Views;
+    const [mostSeen, setMostSeen] = useState<CategoriesProps []>([]);
+    const [whatArray, setWhatArray] = useState(false);
+
+    function handleCreateArrayMostSeen(operation: string){
+      setWhatArray(true);
       if(testeArrayII !== ''){
        var item0 = categories.find(item => item.id === Number(testeArrayII[0].split(":")[0]));
-       console.log(item0)
-       /* mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[1])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[2])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[3])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[4])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[5])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[6])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[7])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[8])));
-       mostSeen.push( categories.find(item => item.id === Number(testeArrayII[0].split(":")[9]))); */
-      };
+       var item1 = categories.find(item => item.id === Number(testeArrayII[1].split(":")[0]));
+       var item2 = categories.find(item => item.id === Number(testeArrayII[2].split(":")[0]));
+       var item3 = categories.find(item => item.id === Number(testeArrayII[3].split(":")[0]));
+       var item4 = categories.find(item => item.id === Number(testeArrayII[4].split(":")[0]));
+       var item5 = categories.find(item => item.id === Number(testeArrayII[5].split(":")[0]));
+       var item6 = categories.find(item => item.id === Number(testeArrayII[6].split(":")[0]));
+       var item7 = categories.find(item => item.id === Number(testeArrayII[7].split(":")[0]));
+       var item8 = categories.find(item => item.id === Number(testeArrayII[8].split(":")[0]));
+       var item9 = categories.find(item => item.id === Number(testeArrayII[9].split(":")[0]));
+       var arrayMostSeen = [item0! ,item1! , item2! , item3!, item4!, item5!, item6!, item7!, item8!, item9!];
 
+       if(arrayMostSeen !== undefined){
+
+        if(operation === '-'){
+          setMostSeen([item9!, item8!, item7!, item6!, item5!, item4!, item3!, item2!, item1!, item0! ]);
+          setTimeout(() => {setWhatArray(true), 500})
+        }else{
+          setMostSeen([item0! ,item1! , item2! , item3!, item4!, item5!, item6!, item7!, item8!, item9!]);
+          setTimeout(() => {setWhatArray(true)}, 500);
+        };
+       };
+      };
     };
-    useEffect(() => {handleCreateCategory()},[testeArrayII])
+
+
     return(
         <View style={styles.container}>
 
@@ -132,7 +155,12 @@ export function Home(){
             <Loading />
             : 
             <ScrollView style={{width: '100%'}} contentContainerStyle={{alignItems: 'center'}}>
-              {arrayEditable.map((item, index) => <CourseCatalog onValueChange={(value) => createArrayOrganize(value)} key={index} id={item.id} slug={item.slug} name={item.name} />)} 
+              { whatArray === true
+                ?
+                mostSeen.map((item, index) => <CourseCatalog onValueChange={(value) => createArrayOrganize(value)} key={index} id={item!.id} slug={item!.slug} name={item!.name} />)
+                :
+                arrayEditable.map((item, index) => <CourseCatalog onValueChange={(value) => createArrayOrganize(value)} key={index} id={item!.id} slug={item!.slug} name={item!.name} />)
+              } 
             </ScrollView>}
 
             <Footer />

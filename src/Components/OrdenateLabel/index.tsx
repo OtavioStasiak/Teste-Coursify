@@ -15,7 +15,7 @@ export function OrdenateLabel({title, onChangeFilter, closeCollapsible}: Props){
 
         closeCollapsible();
 
-        setTimeout(() => {onChangeFilter(title);}, 1000); 
+        setTimeout(() => {onChangeFilter(title);}, 380); 
         
     };
 

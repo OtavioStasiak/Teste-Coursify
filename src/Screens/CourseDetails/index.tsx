@@ -7,7 +7,7 @@ import { Header } from '../../Components/Header';
 import { Footer } from '../../Components/Footer';
 
 import { styles } from './styles';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { PostProps } from '../../Components/CourseCatalogItem';
 import { api } from '../../Services/api';
 import { Loading } from '../../Animations/Loading';
@@ -28,6 +28,7 @@ export function CourseDetails(){
     //Dados vindo da tela anterior;
     const routes = useRoute();
     const {PostParams} = routes.params as Params;
+    const navigation = useNavigation();
 
     const [content, setContent] = useState<ContentPostProps[]>([]);
 
@@ -36,7 +37,7 @@ export function CourseDetails(){
 
         const response = await api.get(`posts?categories=${PostParams.id}`)
         .then(response => setContent(response.data))
-        .catch(error => console.log(error))
+        .catch(error => navigation.navigate('Error'))
         .finally(() => setLoading(false));
  
 
