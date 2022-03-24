@@ -1,5 +1,7 @@
 import axios from "axios";
 
-const api = axios.create({baseURL: 'https://blog.coursify.me/wp-json/wp/v2/'});
+const {BASE_URL} = process.env;
+
+const api = axios.create({baseURL: BASE_URL});
 
 export { api };
